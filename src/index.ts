@@ -18,6 +18,7 @@ if (config.transport === "http") {
     ...(config.iconifyBaseUrl === undefined ? {} : { iconifyBaseUrl: config.iconifyBaseUrl }),
     ...(config.apiKey === undefined ? {} : { apiKey: config.apiKey }),
     ...(config.publicBaseUrl === undefined ? {} : { publicBaseUrl: config.publicBaseUrl }),
+    ...(config.approvalSecret === undefined ? {} : { approvalSecret: config.approvalSecret }),
   });
   console.error(JSON.stringify({ event: "server_started", transport: "http", baseUrl: running.baseUrl, onlineAssets: config.onlineAssets }));
 } else {
@@ -26,6 +27,7 @@ if (config.transport === "http") {
       outputRoot: config.outputRoot,
       onlineAssets: config.onlineAssets,
       ...(config.iconifyBaseUrl === undefined ? {} : { iconifyBaseUrl: config.iconifyBaseUrl }),
+      ...(config.approvalSecret === undefined ? {} : { approvalSecret: config.approvalSecret }),
     }),
     {
       onerror: (error) => {

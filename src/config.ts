@@ -13,6 +13,7 @@ export interface DrawArchRuntimeConfig {
   readonly allowedHosts: readonly string[];
   readonly allowedOrigins: readonly string[];
   readonly publicBaseUrl?: string;
+  readonly approvalSecret?: string;
 }
 
 export function runtimeConfig(env: NodeJS.ProcessEnv = process.env): DrawArchRuntimeConfig {
@@ -29,6 +30,7 @@ export function runtimeConfig(env: NodeJS.ProcessEnv = process.env): DrawArchRun
     allowedHosts: splitList(env.DRAWARCH_ALLOWED_HOSTS, ["localhost", "127.0.0.1", "[::1]"]),
     allowedOrigins: splitList(env.DRAWARCH_ALLOWED_ORIGINS, ["localhost", "127.0.0.1", "[::1]"]),
     ...(env.DRAWARCH_PUBLIC_BASE_URL === undefined ? {} : { publicBaseUrl: env.DRAWARCH_PUBLIC_BASE_URL }),
+    ...(env.DRAWARCH_APPROVAL_SECRET === undefined ? {} : { approvalSecret: env.DRAWARCH_APPROVAL_SECRET }),
   });
 }
 

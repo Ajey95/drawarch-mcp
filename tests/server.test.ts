@@ -15,7 +15,7 @@ afterEach(async () => {
 });
 
 describe("DrawArch MCP stdio server", () => {
-  it("lists and invokes all five V1 tools through a real MCP client", async () => {
+  it("lists V1 and V2 tools and creates portable reference recreations through a real MCP client", async () => {
     const root = await mkdtemp(join(tmpdir(), "drawarch-server-"));
     roots.push(root);
     const env = Object.fromEntries(
@@ -43,6 +43,12 @@ describe("DrawArch MCP stdio server", () => {
       "resolve_asset",
       "create_drawio",
       "validate_drawio",
+      "prepare_reference_recreation",
+      "update_reference_plan",
+      "get_reference_plan",
+      "create_reference_drawio",
+      "validate_reference_drawio",
+      "compare_reference_recreation",
     ]);
 
     const themes = await client.callTool({ name: "list_themes", arguments: {} });
@@ -86,5 +92,27 @@ describe("DrawArch MCP stdio server", () => {
       arguments: { fileName: "mcp-test.drawio" },
     });
     expect((validation.structuredContent as { validation: { valid: boolean } }).validation.valid).toBe(true);
+
+    const referencePlan = {
+      title: "Exact reference",
+      outputFile: "reference.drawio",
+      canvas: { width: 800, height: 500, background: "#ffffff" },
+      layers: [{ id: "main", label: "Main", zIndex: 0 }],
+      elements: [
+        { id: "api", type: "shape", layerId: "main", x: 60, y: 70, width: 220, height: 120, zIndex: 1, confidence: 0.99, label: "API", shape: "roundedRectangle", style: { fillColor: "#ffffff", strokeColor: "#111827" } },
+        { id: "db", type: "shape", layerId: "main", x: 480, y: 70, width: 220, height: 120, zIndex: 1, confidence: 0.98, label: "Database", shape: "cylinder", style: { fillColor: "#f8fafc", strokeColor: "#111827" } },
+        { id: "request", type: "connector", layerId: "main", zIndex: 0, confidence: 0.97, source: "api", target: "db", waypoints: [{ x: 380, y: 130 }], style: { strokeColor: "#2563eb", width: 2, endArrow: "block" } },
+      ],
+      fidelity: { minimumStructuralScore: 1, notes: [] },
+    };
+    const prepared = await client.callTool({ name: "prepare_reference_recreation", arguments: { plan: referencePlan, approved: true } });
+    const preparedOutput = prepared.structuredContent as { planId: string; revision: number; approvalToken: string };
+    expect(preparedOutput.approvalToken).toBeTruthy();
+    const recreated = await client.callTool({ name: "create_reference_drawio", arguments: preparedOutput });
+    const recreatedOutput = recreated.structuredContent as { outputFile: string; comparison: { structuralScore: number } };
+    expect(recreatedOutput.outputFile).toBe("reference.drawio");
+    expect(recreatedOutput.comparison.structuralScore).toBe(1);
+    expect(await readFile(join(root, "reference.drawio"), "utf8")).toContain('x="60" y="70" width="220" height="120"');
+    expect(recreated.content.some((item) => item.type === "resource")).toBe(true);
   }, 20_000);
 });

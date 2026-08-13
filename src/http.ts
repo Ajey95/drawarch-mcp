@@ -1,4 +1,4 @@
-import { createHash, timingSafeEqual } from "node:crypto";
+import { createHash, randomBytes, timingSafeEqual } from "node:crypto";
 import { createReadStream } from "node:fs";
 import { stat } from "node:fs/promises";
 import { createServer as createNodeServer, type IncomingMessage, type ServerResponse } from "node:http";
@@ -20,6 +20,7 @@ export interface DrawArchHttpOptions {
   readonly allowedHosts: readonly string[];
   readonly allowedOrigins: readonly string[];
   readonly publicBaseUrl?: string;
+  readonly approvalSecret?: string;
 }
 
 export interface RunningDrawArchHttpServer {
@@ -30,10 +31,12 @@ export interface RunningDrawArchHttpServer {
 export async function createDrawArchHttpServer(options: DrawArchHttpOptions): Promise<RunningDrawArchHttpServer> {
   const validateHost = hostHeaderValidation([...options.allowedHosts]);
   const validateOrigin = originValidation([...options.allowedOrigins]);
+  const approvalSecret = options.approvalSecret ?? randomBytes(32).toString("hex");
   const handler = createMcpHandler(() => createServer({
     outputRoot: options.outputRoot,
     onlineAssets: options.onlineAssets,
     ...(options.iconifyBaseUrl === undefined ? {} : { iconifyBaseUrl: options.iconifyBaseUrl }),
+    approvalSecret,
   }), { responseMode: "json" });
   const nodeMcpHandler = toNodeHandler(handler, {
     onerror: (error) => console.error(JSON.stringify({ event: "http_transport_error", message: error.message })),

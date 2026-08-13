@@ -1,3 +1,4 @@
+import { randomBytes } from "node:crypto";
 import { readFile } from "node:fs/promises";
 
 import { McpServer } from "@modelcontextprotocol/server";
@@ -10,6 +11,9 @@ import { AssetResolver } from "./assets/resolver.js";
 import { ArchitectureSpecSchema } from "./domain/schema.js";
 import { drawioArtifact } from "./files/artifact.js";
 import { resolveOutputPath } from "./files/output.js";
+import { ReferenceRecreationService } from "./reference/service.js";
+import { PlanStore } from "./reference/store.js";
+import { registerReferenceTools } from "./reference/tools.js";
 import { listThemes } from "./themes/themes.js";
 import { validateDrawio } from "./validate/drawio.js";
 import { DRAWARCH_VERSION } from "./version.js";
@@ -18,6 +22,7 @@ export interface DrawArchServerOptions {
   readonly outputRoot: string;
   readonly onlineAssets: boolean;
   readonly iconifyBaseUrl?: string;
+  readonly approvalSecret?: string;
 }
 
 const ThemeSummarySchema = z.object({
@@ -49,6 +54,12 @@ export function createServer(options: DrawArchServerOptions): McpServer {
     : undefined;
   const resolver = new AssetResolver({ ...(onlineProvider === undefined ? {} : { onlineProvider }) });
   const service = new DrawArchService({ outputRoot: options.outputRoot, assetResolver: resolver });
+  const referenceService = new ReferenceRecreationService({
+    outputRoot: options.outputRoot,
+    onlineAssets: options.onlineAssets,
+    resolver,
+    store: new PlanStore({ root: options.outputRoot, secret: options.approvalSecret ?? randomBytes(32).toString("hex") }),
+  });
   const server = new McpServer({ name: "drawarch-mcp", version: DRAWARCH_VERSION });
 
   server.registerTool(
@@ -216,6 +227,8 @@ export function createServer(options: DrawArchServerOptions): McpServer {
       }
     }),
   );
+
+  registerReferenceTools(server, referenceService, options.outputRoot);
 
   return server;
 }
