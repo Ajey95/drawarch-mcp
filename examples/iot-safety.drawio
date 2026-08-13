@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="DrawArch" compressed="false" version="1.0" pages="1">
+  <diagram id="drawarch-page" name="Page-1">
+    <mxGraphModel dx="1050" dy="1198" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1050" pageHeight="1198" background="#111111" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="diagram-title" value="Real-Time IoT Safety Platform" style="text=1;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#F8FAFC;fontFamily=Comic Sans MS;fontSize=28;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="22" width="950" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="group-edge" value="Edge Devices — Local sensing and resilient collection" style="swimlane=1;html=1;startSize=48;horizontal=1;rounded=1;dashed=1;dashPattern=4 4;sketch=1;fillColor=#151515;strokeColor=#8B8B8B;fontColor=#F8FAFC;fontFamily=Comic Sans MS;fontSize=18;fontStyle=1;container=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="62" y="32" width="236" height="646" as="geometry"/>
+        </mxCell>
+        <mxCell id="group-cloud" value="Cloud Platform — Ingestion, intelligence and storage" style="swimlane=1;html=1;startSize=48;horizontal=1;rounded=1;dashed=1;dashPattern=4 4;sketch=1;fillColor=#151515;strokeColor=#8B8B8B;fontColor=#F8FAFC;fontFamily=Comic Sans MS;fontSize=18;fontStyle=1;container=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="388" y="32" width="236" height="1066" as="geometry"/>
+        </mxCell>
+        <mxCell id="group-users" value="User Experience — Live safety response" style="swimlane=1;html=1;startSize=48;horizontal=1;rounded=1;dashed=1;dashPattern=4 4;sketch=1;fillColor=#151515;strokeColor=#8B8B8B;fontColor=#F8FAFC;fontFamily=Comic Sans MS;fontSize=18;fontStyle=1;container=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="714" y="32" width="236" height="436" as="geometry"/>
+        </mxCell>
+        <mxCell id="node-sensor" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#181818;strokeColor=#64748B;shadow=0;container=1;collapsible=0;" vertex="1" parent="group-edge">
+          <mxGeometry x="38" y="68" width="160" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="image-sensor" value="" style="shape=image;imageAspect=0;aspect=fixed;verticalLabelPosition=bottom;verticalAlign=top;strokeColor=none;fillColor=none;image=data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Crect%20x%3D%2224%22%20y%3D%2225%22%20width%3D%2248%22%20height%3D%2248%22%20rx%3D%228%22%20fill%3D%22%2322C55E%22%2F%3E%3Crect%20x%3D%2234%22%20y%3D%2235%22%20width%3D%2228%22%20height%3D%2228%22%20rx%3D%224%22%20fill%3D%22%23DCFCE7%22%2F%3E%3Ccircle%20cx%3D%2248%22%20cy%3D%2249%22%20r%3D%228%22%20fill%3D%22%2316A34A%22%2F%3E%3Cpath%20d%3D%22M19%2035H9m10%2014H9m10%2014H9m78-28H77m10%2014H77m10%2014H77M35%2020V10m14%2010V10m14%2010V10M35%2088V78m14%2010V78m14%2010V78%22%20stroke%3D%22%2394A3B8%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E;" vertex="1" parent="node-sensor" drawarchAssetId="iot-sensor" drawarchAssetSource="bundled" drawarchAssetProvider="drawarch" drawarchLicense="MIT" drawarchIntegrity="sha256:298fbf81daaf87546bc0d36ef8194b65875bc40e58162728f3871b0d2b77f975">
+          <mxGeometry x="40" y="8" width="80" height="72" as="geometry"/>
+        </mxCell>
+        <mxCell id="label-sensor" value="IoT Sensor — GPS + IMU" style="text=1;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontColor=#F8FAFC;fontFamily=Comic Sans MS;fontSize=15;fontStyle=1;" vertex="1" parent="node-sensor">
+          <mxGeometry x="4" y="82" width="152" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="node-mobile" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#181818;strokeColor=#64748B;shadow=0;container=1;collapsible=0;" vertex="1" parent="group-edge">
+          <mxGeometry x="38" y="278" width="160" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="image-mobile" value="" style="shape=image;imageAspect=0;aspect=fixed;verticalLabelPosition=bottom;verticalAlign=top;strokeColor=none;fillColor=none;image=data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Crect%20x%3D%2225%22%20y%3D%228%22%20width%3D%2246%22%20height%3D%2280%22%20rx%3D%228%22%20fill%3D%22%23334155%22%2F%3E%3Crect%20x%3D%2230%22%20y%3D%2217%22%20width%3D%2236%22%20height%3D%2258%22%20rx%3D%222%22%20fill%3D%22%2338BDF8%22%2F%3E%3Ccircle%20cx%3D%2248%22%20cy%3D%2281%22%20r%3D%223%22%20fill%3D%22%23E2E8F0%22%2F%3E%3Cpath%20d%3D%22m35%2059%2010-11%208%207%209-12v25H35Z%22%20fill%3D%22%23BAE6FD%22%2F%3E%3C%2Fsvg%3E;" vertex="1" parent="node-mobile" drawarchAssetId="mobile-device" drawarchAssetSource="bundled" drawarchAssetProvider="drawarch" drawarchLicense="MIT" drawarchIntegrity="sha256:4e47c22a09b2f25b672f02f7b3b09fc0dbe6c60f9f0a4462b67316cb721a85bd">
+          <mxGeometry x="40" y="8" width="80" height="72" as="geometry"/>
+        </mxCell>
+        <mxCell id="label-mobile" value="Mobile Device — Background collector" style="text=1;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontColor=#F8FAFC;fontFamily=Comic Sans MS;fontSize=15;fontStyle=1;" vertex="1" parent="node-mobile">
+          <mxGeometry x="4" y="82" width="152" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="node-gateway" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#181818;strokeColor=#64748B;shadow=0;container=1;collapsible=0;" vertex="1" parent="group-edge">
+          <mxGeometry x="38" y="488" width="160" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="image-gateway" value="" style="shape=image;imageAspect=0;aspect=fixed;verticalLabelPosition=bottom;verticalAlign=top;strokeColor=none;fillColor=none;image=data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Crect%20x%3D%2215%22%20y%3D%2212%22%20width%3D%2266%22%20height%3D%2272%22%20rx%3D%226%22%20fill%3D%22%2364748B%22%2F%3E%3Crect%20x%3D%2221%22%20y%3D%2219%22%20width%3D%2254%22%20height%3D%2216%22%20rx%3D%223%22%20fill%3D%22%23E2E8F0%22%2F%3E%3Crect%20x%3D%2221%22%20y%3D%2240%22%20width%3D%2254%22%20height%3D%2216%22%20rx%3D%223%22%20fill%3D%22%23CBD5E1%22%2F%3E%3Crect%20x%3D%2221%22%20y%3D%2261%22%20width%3D%2254%22%20height%3D%2216%22%20rx%3D%223%22%20fill%3D%22%2394A3B8%22%2F%3E%3Ccircle%20cx%3D%2266%22%20cy%3D%2227%22%20r%3D%224%22%20fill%3D%22%234ADE80%22%2F%3E%3Ccircle%20cx%3D%2266%22%20cy%3D%2248%22%20r%3D%224%22%20fill%3D%22%2338BDF8%22%2F%3E%3Ccircle%20cx%3D%2266%22%20cy%3D%2269%22%20r%3D%224%22%20fill%3D%22%23FBBF24%22%2F%3E%3C%2Fsvg%3E;" vertex="1" parent="node-gateway" drawarchAssetId="server" drawarchAssetSource="bundled" drawarchAssetProvider="drawarch" drawarchLicense="MIT" drawarchIntegrity="sha256:ebd24594028c79336606f93d8b90603d62bfcaf0d01b5eb5d11525eba9f32963">
+          <mxGeometry x="40" y="8" width="80" height="72" as="geometry"/>
+        </mxCell>
+        <mxCell id="label-gateway" value="Edge Gateway — Store and forward" style="text=1;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontColor=#F8FAFC;fontFamily=Comic Sans MS;fontSize=15;fontStyle=1;" vertex="1" parent="node-gateway">
+          <mxGeometry x="4" y="82" width="152" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="node-broker" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#181818;strokeColor=#64748B;shadow=0;container=1;collapsible=0;" vertex="1" parent="group-cloud">
+          <mxGeometry x="38" y="68" width="160" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="image-broker" value="" style="shape=image;imageAspect=0;aspect=fixed;verticalLabelPosition=bottom;verticalAlign=top;strokeColor=none;fillColor=none;image=data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Crect%20x%3D%229%22%20y%3D%2217%22%20width%3D%2225%22%20height%3D%2262%22%20rx%3D%226%22%20fill%3D%22%23F97316%22%2F%3E%3Crect%20x%3D%2262%22%20y%3D%2217%22%20width%3D%2225%22%20height%3D%2262%22%20rx%3D%226%22%20fill%3D%22%2306B6D4%22%2F%3E%3Cpath%20d%3D%22M34%2032h23m-8-8%208%208-8%208M62%2064H39m8-8-8%208%208%208%22%20fill%3D%22none%22%20stroke%3D%22%23F8FAFC%22%20stroke-width%3D%226%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E;" vertex="1" parent="node-broker" drawarchAssetId="message-queue" drawarchAssetSource="bundled" drawarchAssetProvider="drawarch" drawarchLicense="MIT" drawarchIntegrity="sha256:b82b760cdec005e8c73de0c01a124cdf4b77b0d69cce9c1da637f6b5d9eaf1fb">
+          <mxGeometry x="40" y="8" width="80" height="72" as="geometry"/>
+        </mxCell>
+        <mxCell id="label-broker" value="Message Broker — MQTT ingestion" style="text=1;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontColor=#F8FAFC;fontFamily=Comic Sans MS;fontSize=15;fontStyle=1;" vertex="1" parent="node-broker">
+          <mxGeometry x="4" y="82" width="152" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="node-api" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#181818;strokeColor=#64748B;shadow=0;container=1;collapsible=0;" vertex="1" parent="group-cloud">
+          <mxGeometry x="38" y="278" width="160" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="image-api" value="" style="shape=image;imageAspect=0;aspect=fixed;verticalLabelPosition=bottom;verticalAlign=top;strokeColor=none;fillColor=none;image=data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Cpath%20d%3D%22M37%2010v23H24c-18%200-18%2028%200%2028h13v25%22%20fill%3D%22none%22%20stroke%3D%22%2306B6D4%22%20stroke-width%3D%229%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M59%2010v23h13c18%200%2018%2028%200%2028H59v25%22%20fill%3D%22none%22%20stroke%3D%22%23F97316%22%20stroke-width%3D%229%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M35%2047h26%22%20stroke%3D%22%23E2E8F0%22%20stroke-width%3D%227%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E;" vertex="1" parent="node-api" drawarchAssetId="api-service" drawarchAssetSource="bundled" drawarchAssetProvider="drawarch" drawarchLicense="MIT" drawarchIntegrity="sha256:de64820661e3a4450a673c3fad6d19fb7ba2370c713dc36bc854cdfa8738dc34">
+          <mxGeometry x="40" y="8" width="80" height="72" as="geometry"/>
+        </mxCell>
+        <mxCell id="label-api" value="Safety API — Realtime decisions" style="text=1;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontColor=#F8FAFC;fontFamily=Comic Sans MS;fontSize=15;fontStyle=1;" vertex="1" parent="node-api">
+          <mxGeometry x="4" y="82" width="152" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="node-model" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#181818;strokeColor=#64748B;shadow=0;container=1;collapsible=0;" vertex="1" parent="group-cloud">
+          <mxGeometry x="38" y="488" width="160" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="image-model" value="" style="shape=image;imageAspect=0;aspect=fixed;verticalLabelPosition=bottom;verticalAlign=top;strokeColor=none;fillColor=none;image=data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Cpath%20d%3D%22M39%2013c-13%200-20%2010-18%2021-10%204-13%2018-5%2026-4%2012%207%2024%2019%2021%205%209%2022%207%2022-7V22c0-6-7-9-18-9Z%22%20fill%3D%22%23F9A8D4%22%2F%3E%3Cpath%20d%3D%22M57%2018c8-7%2020-1%2019%2010%2010%202%2014%2015%207%2023%208%208%202%2023-9%2024-2%2012-17%2014-22%205%22%20fill%3D%22%2338BDF8%22%2F%3E%3Cg%20fill%3D%22%230F172A%22%3E%3Ccircle%20cx%3D%2234%22%20cy%3D%2235%22%20r%3D%224%22%2F%3E%3Ccircle%20cx%3D%2228%22%20cy%3D%2255%22%20r%3D%224%22%2F%3E%3Ccircle%20cx%3D%2242%22%20cy%3D%2268%22%20r%3D%224%22%2F%3E%3Ccircle%20cx%3D%2264%22%20cy%3D%2237%22%20r%3D%224%22%2F%3E%3Ccircle%20cx%3D%2270%22%20cy%3D%2258%22%20r%3D%224%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22m34%2035-6%2020%2014%2013m22-31%206%2021-18%2022M34%2035l23-17%22%20fill%3D%22none%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E;" vertex="1" parent="node-model" drawarchAssetId="ai-model" drawarchAssetSource="bundled" drawarchAssetProvider="drawarch" drawarchLicense="MIT" drawarchIntegrity="sha256:c8a9571916aecf859c41b18c4b584acb19c30c5304caba6a6d3dc91ceca26417">
+          <mxGeometry x="40" y="8" width="80" height="72" as="geometry"/>
+        </mxCell>
+        <mxCell id="label-model" value="Risk Model — Event classification" style="text=1;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontColor=#F8FAFC;fontFamily=Comic Sans MS;fontSize=15;fontStyle=1;" vertex="1" parent="node-model">
+          <mxGeometry x="4" y="82" width="152" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="node-database" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#181818;strokeColor=#64748B;shadow=0;container=1;collapsible=0;" vertex="1" parent="group-cloud">
+          <mxGeometry x="38" y="698" width="160" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="image-database" value="" style="shape=image;imageAspect=0;aspect=fixed;verticalLabelPosition=bottom;verticalAlign=top;strokeColor=none;fillColor=none;image=data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Cellipse%20cx%3D%2248%22%20cy%3D%2220%22%20rx%3D%2231%22%20ry%3D%2213%22%20fill%3D%22%23C4B5FD%22%2F%3E%3Cpath%20d%3D%22M17%2020v54c0%207%2014%2013%2031%2013s31-6%2031-13V20%22%20fill%3D%22%23A78BFA%22%2F%3E%3Cpath%20d%3D%22M17%2038c0%207%2014%2013%2031%2013s31-6%2031-13M17%2056c0%207%2014%2013%2031%2013s31-6%2031-13%22%20fill%3D%22none%22%20stroke%3D%22%23EDE9FE%22%20stroke-width%3D%224%22%2F%3E%3Cellipse%20cx%3D%2248%22%20cy%3D%2220%22%20rx%3D%2231%22%20ry%3D%2213%22%20fill%3D%22none%22%20stroke%3D%22%23EDE9FE%22%20stroke-width%3D%224%22%2F%3E%3C%2Fsvg%3E;" vertex="1" parent="node-database" drawarchAssetId="database" drawarchAssetSource="bundled" drawarchAssetProvider="drawarch" drawarchLicense="MIT" drawarchIntegrity="sha256:9a7f743f13495b3353abd98d2ddf6235b1b447cadff026031e1059704b3e3635">
+          <mxGeometry x="40" y="8" width="80" height="72" as="geometry"/>
+        </mxCell>
+        <mxCell id="label-database" value="Telemetry Store — Trips and incidents" style="text=1;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontColor=#F8FAFC;fontFamily=Comic Sans MS;fontSize=15;fontStyle=1;" vertex="1" parent="node-database">
+          <mxGeometry x="4" y="82" width="152" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="node-monitoring" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#181818;strokeColor=#64748B;shadow=0;container=1;collapsible=0;" vertex="1" parent="group-cloud">
+          <mxGeometry x="38" y="908" width="160" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="image-monitoring" value="" style="shape=image;imageAspect=0;aspect=fixed;verticalLabelPosition=bottom;verticalAlign=top;strokeColor=none;fillColor=none;image=data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Crect%20x%3D%228%22%20y%3D%2212%22%20width%3D%2280%22%20height%3D%2258%22%20rx%3D%226%22%20fill%3D%22%23CBD5E1%22%2F%3E%3Crect%20x%3D%2214%22%20y%3D%2218%22%20width%3D%2268%22%20height%3D%2246%22%20rx%3D%222%22%20fill%3D%22%23EFF6FF%22%2F%3E%3Cpath%20d%3D%22m19%2051%2013-11%2011%208%2013-20%2010%2013%2011-8%22%20fill%3D%22none%22%20stroke%3D%22%232563EB%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M38%2070v10m20-10v10M28%2082h40%22%20stroke%3D%22%2364748B%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E;" vertex="1" parent="node-monitoring" drawarchAssetId="monitoring" drawarchAssetSource="bundled" drawarchAssetProvider="drawarch" drawarchLicense="MIT" drawarchIntegrity="sha256:662821fc002cbe665ab73a381b8e8ae40bd81138b7ac45b25fc70fb02f1d8722">
+          <mxGeometry x="40" y="8" width="80" height="72" as="geometry"/>
+        </mxCell>
+        <mxCell id="label-monitoring" value="Observability — Metrics and alerts" style="text=1;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontColor=#F8FAFC;fontFamily=Comic Sans MS;fontSize=15;fontStyle=1;" vertex="1" parent="node-monitoring">
+          <mxGeometry x="4" y="82" width="152" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="node-dashboard" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#181818;strokeColor=#64748B;shadow=0;container=1;collapsible=0;" vertex="1" parent="group-users">
+          <mxGeometry x="38" y="68" width="160" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="image-dashboard" value="" style="shape=image;imageAspect=0;aspect=fixed;verticalLabelPosition=bottom;verticalAlign=top;strokeColor=none;fillColor=none;image=data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Crect%20x%3D%227%22%20y%3D%2214%22%20width%3D%2282%22%20height%3D%2268%22%20rx%3D%227%22%20fill%3D%22%23CBD5E1%22%2F%3E%3Crect%20x%3D%2212%22%20y%3D%2227%22%20width%3D%2272%22%20height%3D%2249%22%20rx%3D%223%22%20fill%3D%22%23F8FAFC%22%2F%3E%3Ccircle%20cx%3D%2218%22%20cy%3D%2221%22%20r%3D%223%22%20fill%3D%22%23FB7185%22%2F%3E%3Ccircle%20cx%3D%2228%22%20cy%3D%2221%22%20r%3D%223%22%20fill%3D%22%23FBBF24%22%2F%3E%3Ccircle%20cx%3D%2238%22%20cy%3D%2221%22%20r%3D%223%22%20fill%3D%22%234ADE80%22%2F%3E%3Crect%20x%3D%2218%22%20y%3D%2235%22%20width%3D%2220%22%20height%3D%2233%22%20rx%3D%222%22%20fill%3D%22%2338BDF8%22%2F%3E%3Crect%20x%3D%2244%22%20y%3D%2235%22%20width%3D%2232%22%20height%3D%227%22%20rx%3D%222%22%20fill%3D%22%2394A3B8%22%2F%3E%3Crect%20x%3D%2244%22%20y%3D%2248%22%20width%3D%2225%22%20height%3D%227%22%20rx%3D%222%22%20fill%3D%22%23C4B5FD%22%2F%3E%3C%2Fsvg%3E;" vertex="1" parent="node-dashboard" drawarchAssetId="web-application" drawarchAssetSource="bundled" drawarchAssetProvider="drawarch" drawarchLicense="MIT" drawarchIntegrity="sha256:7a9f2923e1e054b8907bfafb2c81c90cfefea5a0d4ef2f0798cd220e99051851">
+          <mxGeometry x="40" y="8" width="80" height="72" as="geometry"/>
+        </mxCell>
+        <mxCell id="label-dashboard" value="Safety Dashboard — Live fleet view" style="text=1;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontColor=#F8FAFC;fontFamily=Comic Sans MS;fontSize=15;fontStyle=1;" vertex="1" parent="node-dashboard">
+          <mxGeometry x="4" y="82" width="152" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="node-responder" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#181818;strokeColor=#64748B;shadow=0;container=1;collapsible=0;" vertex="1" parent="group-users">
+          <mxGeometry x="38" y="278" width="160" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="image-responder" value="" style="shape=image;imageAspect=0;aspect=fixed;verticalLabelPosition=bottom;verticalAlign=top;strokeColor=none;fillColor=none;image=data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Ccircle%20cx%3D%2248%22%20cy%3D%2228%22%20r%3D%2218%22%20fill%3D%22%23F6A96C%22%2F%3E%3Cpath%20d%3D%22M17%2086c2-23%2014-35%2031-35s29%2012%2031%2035%22%20fill%3D%22%2338BDF8%22%2F%3E%3Cpath%20d%3D%22M31%2022c2-15%2031-17%2035%202-8-3-15-9-20-14-2%207-7%2011-15%2012Z%22%20fill%3D%22%23374151%22%2F%3E%3C%2Fsvg%3E;" vertex="1" parent="node-responder" drawarchAssetId="user" drawarchAssetSource="bundled" drawarchAssetProvider="drawarch" drawarchLicense="MIT" drawarchIntegrity="sha256:23d2a24b992080edba75e0dbff06161ddfe5014c2167d2a15372dc2f4155f95f">
+          <mxGeometry x="40" y="8" width="80" height="72" as="geometry"/>
+        </mxCell>
+        <mxCell id="label-responder" value="Emergency Contact — Verified notification" style="text=1;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontColor=#F8FAFC;fontFamily=Comic Sans MS;fontSize=15;fontStyle=1;" vertex="1" parent="node-responder">
+          <mxGeometry x="4" y="82" width="152" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-sensor-data" value="BLE samples" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#38BDF8;dashed=1;dashPattern=8 8;sketch=1;fontColor=#F8FAFC;fontFamily=Comic Sans MS;labelBackgroundColor=#111111;flowAnimation=1;flowDuration=700;flowTiming=linear;flowDirection=normal;" edge="1" parent="1" source="node-sensor" target="node-mobile" drawarchFlow="realtime">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+                  <mxPoint x="180" y="160"/>
+                  <mxPoint x="180" y="370"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-edge-upload" value="Buffered telemetry" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#FB923C;dashed=1;dashPattern=8 8;sketch=1;fontColor=#F8FAFC;fontFamily=Comic Sans MS;labelBackgroundColor=#111111;flowAnimation=1;flowDuration=700;flowTiming=linear;flowDirection=normal;" edge="1" parent="1" source="node-mobile" target="node-gateway" drawarchFlow="batch">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+                  <mxPoint x="180" y="370"/>
+                  <mxPoint x="180" y="580"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-mqtt-stream" value="MQTT/TLS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#38BDF8;dashed=1;dashPattern=8 8;sketch=1;fontColor=#F8FAFC;fontFamily=Comic Sans MS;labelBackgroundColor=#111111;flowAnimation=1;flowDuration=700;flowTiming=linear;flowDirection=normal;" edge="1" parent="1" source="node-gateway" target="node-broker" drawarchFlow="realtime">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+                  <mxPoint x="343" y="580"/>
+                  <mxPoint x="343" y="160"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-broker-api" value="Events" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#38BDF8;dashed=1;dashPattern=8 8;sketch=1;fontColor=#F8FAFC;fontFamily=Comic Sans MS;labelBackgroundColor=#111111;flowAnimation=1;flowDuration=700;flowTiming=linear;flowDirection=normal;" edge="1" parent="1" source="node-broker" target="node-api" drawarchFlow="realtime">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+                  <mxPoint x="506" y="160"/>
+                  <mxPoint x="506" y="370"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-model-request" value="Classify" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#FF7F50;dashed=1;dashPattern=8 8;sketch=1;fontColor=#F8FAFC;fontFamily=Comic Sans MS;labelBackgroundColor=#111111;flowAnimation=1;flowDuration=700;flowTiming=linear;flowDirection=normal;" edge="1" parent="1" source="node-api" target="node-model" drawarchFlow="request">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+                  <mxPoint x="506" y="370"/>
+                  <mxPoint x="506" y="580"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-persist" value="Incident record" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#FB923C;dashed=1;dashPattern=8 8;sketch=1;fontColor=#F8FAFC;fontFamily=Comic Sans MS;labelBackgroundColor=#111111;flowAnimation=1;flowDuration=700;flowTiming=linear;flowDirection=normal;" edge="1" parent="1" source="node-api" target="node-database" drawarchFlow="batch">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+                  <mxPoint x="506" y="370"/>
+                  <mxPoint x="506" y="790"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-metrics" value="Metrics + traces" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#A78BFA;dashed=1;dashPattern=8 8;sketch=1;fontColor=#F8FAFC;fontFamily=Comic Sans MS;labelBackgroundColor=#111111;flowAnimation=1;flowDuration=700;flowTiming=linear;flowDirection=normal;" edge="1" parent="1" source="node-api" target="node-monitoring" drawarchFlow="monitoring">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+                  <mxPoint x="506" y="370"/>
+                  <mxPoint x="506" y="1000"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-dashboard-feed" value="Live updates" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#38BDF8;dashed=1;dashPattern=8 8;sketch=1;fontColor=#F8FAFC;fontFamily=Comic Sans MS;labelBackgroundColor=#111111;flowAnimation=1;flowDuration=700;flowTiming=linear;flowDirection=normal;" edge="1" parent="1" source="node-api" target="node-dashboard" drawarchFlow="realtime">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+                  <mxPoint x="669" y="370"/>
+                  <mxPoint x="669" y="160"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-emergency-alert" value="Verified alert" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4ADE80;dashed=1;dashPattern=8 8;sketch=1;fontColor=#F8FAFC;fontFamily=Comic Sans MS;labelBackgroundColor=#111111;flowAnimation=1;flowDuration=700;flowTiming=linear;flowDirection=normal;" edge="1" parent="1" source="node-api" target="node-responder" drawarchFlow="feedback">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+                  <mxPoint x="669" y="370"/>
+                  <mxPoint x="669" y="370"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend" value="Flow Legend" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#181818;strokeColor=#8B8B8B;fontColor=#F8FAFC;fontFamily=Comic Sans MS;fontStyle=1;container=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="780" y="981" width="230" height="182" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend-realtime" value="realtime" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#38BDF8;strokeColor=none;fontColor=#F8FAFC;fontFamily=Comic Sans MS;align=left;spacingLeft=12;" vertex="1" parent="legend">
+          <mxGeometry x="12" y="34" width="206" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend-batch" value="batch" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FB923C;strokeColor=none;fontColor=#F8FAFC;fontFamily=Comic Sans MS;align=left;spacingLeft=12;" vertex="1" parent="legend">
+          <mxGeometry x="12" y="62" width="206" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend-request" value="request" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF7F50;strokeColor=none;fontColor=#F8FAFC;fontFamily=Comic Sans MS;align=left;spacingLeft=12;" vertex="1" parent="legend">
+          <mxGeometry x="12" y="90" width="206" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend-monitoring" value="monitoring" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A78BFA;strokeColor=none;fontColor=#F8FAFC;fontFamily=Comic Sans MS;align=left;spacingLeft=12;" vertex="1" parent="legend">
+          <mxGeometry x="12" y="118" width="206" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend-feedback" value="feedback" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4ADE80;strokeColor=none;fontColor=#F8FAFC;fontFamily=Comic Sans MS;align=left;spacingLeft=12;" vertex="1" parent="legend">
+          <mxGeometry x="12" y="146" width="206" height="22" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

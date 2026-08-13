@@ -1,0 +1,14 @@
+node_modules/
+dist/
+coverage/
+.drawarch-output/
+.worktrees/
+outputs/
+.drawarch-inspector.*.log
+.env
+.env.*
+!.env.example
+*.tmp
+*.zip
+*.tgz
+.DS_Store

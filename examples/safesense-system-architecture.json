@@ -1,0 +1,415 @@
+{
+  "title": "SafeSense System Architecture",
+  "theme": "animated-sketch-light",
+  "layout": "edge-cloud",
+  "outputFile": "safesense-system-architecture.drawio",
+  "overwrite": true,
+  "onlineAssets": false,
+  "groups": [
+    {
+      "id": "environment",
+      "label": "1. Environmental Sensing",
+      "subtitle": "Validate environmental conditions and derive risk"
+    },
+    {
+      "id": "wifi-csi",
+      "label": "2. Wi-Fi CSI Acquisition",
+      "subtitle": "I/Q, RSSI, time and sequence capture"
+    },
+    {
+      "id": "tinyml",
+      "label": "3. TinyML Edge Intelligence",
+      "subtitle": "Windowed activity inference at the edge"
+    },
+    {
+      "id": "fusion",
+      "label": "4. Fusion & Incident Decision",
+      "subtitle": "Persistent evidence and consecutive confirmation"
+    },
+    {
+      "id": "cloud-response",
+      "label": "5. Communication & Response (Cloud)",
+      "subtitle": "Reliable incident delivery and acknowledgement"
+    },
+    {
+      "id": "services",
+      "label": "System Services",
+      "subtitle": "Power, timing, configuration and diagnostics"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "environmental-sensors",
+      "label": "Environmental Sensors",
+      "subtitle": "Gas · Temperature · Humidity · Pressure",
+      "groupId": "environment",
+      "asset": "iot-sensor"
+    },
+    {
+      "id": "esp32-sensor",
+      "label": "ESP32 Sensor Node",
+      "subtitle": "ADC · I²C · GPIO",
+      "groupId": "environment",
+      "asset": "iot-sensor"
+    },
+    {
+      "id": "environment-processing",
+      "label": "Validate · Filter",
+      "subtitle": "Calibrate · Threshold",
+      "groupId": "environment",
+      "asset": "server"
+    },
+    {
+      "id": "environmental-risk",
+      "label": "Environmental Risk State",
+      "subtitle": "Risk evidence",
+      "groupId": "environment",
+      "asset": "monitoring"
+    },
+    {
+      "id": "esp32-tx",
+      "label": "ESP32 TX Node",
+      "subtitle": "Wi-Fi transmitter",
+      "groupId": "wifi-csi",
+      "asset": "iot-sensor"
+    },
+    {
+      "id": "wifi-channel",
+      "label": "Wi-Fi Channel",
+      "subtitle": "CSI propagation",
+      "groupId": "wifi-csi",
+      "asset": "mobile-device"
+    },
+    {
+      "id": "esp32-rx",
+      "label": "ESP32 RX Node",
+      "subtitle": "Wi-Fi receiver",
+      "groupId": "wifi-csi",
+      "asset": "iot-sensor"
+    },
+    {
+      "id": "csi-callback",
+      "label": "CSI Callback",
+      "subtitle": "I/Q · RSSI · Time · Sequence",
+      "groupId": "wifi-csi",
+      "asset": "api-service"
+    },
+    {
+      "id": "csi-buffer",
+      "label": "Buffer & Quality Check",
+      "subtitle": "Validated CSI windows",
+      "groupId": "wifi-csi",
+      "asset": "server"
+    },
+    {
+      "id": "normalize-window",
+      "label": "Normalize & Window",
+      "subtitle": "Prepare inference input",
+      "groupId": "tinyml",
+      "asset": "server"
+    },
+    {
+      "id": "tinyml-model",
+      "label": "TinyML Model",
+      "subtitle": "Edge activity inference",
+      "groupId": "tinyml",
+      "asset": "ai-model"
+    },
+    {
+      "id": "activity-confidence",
+      "label": "Activity Class + Confidence",
+      "subtitle": "Class and confidence",
+      "groupId": "tinyml",
+      "asset": "ai-model"
+    },
+    {
+      "id": "incident-fusion",
+      "label": "Risk + Activity + Health",
+      "subtitle": "Persistence · Consecutive Confirmation",
+      "groupId": "fusion",
+      "asset": "ai-model"
+    },
+    {
+      "id": "sensor-health",
+      "label": "Sensor & Node Health",
+      "subtitle": "Health evidence",
+      "groupId": "fusion",
+      "asset": "monitoring"
+    },
+    {
+      "id": "structured-json",
+      "label": "Structured JSON",
+      "subtitle": "Confirmed incident",
+      "groupId": "cloud-response",
+      "asset": "object-storage"
+    },
+    {
+      "id": "mqtt-https",
+      "label": "MQTT / HTTPS",
+      "subtitle": "Idempotency · Retry",
+      "groupId": "cloud-response",
+      "asset": "message-queue"
+    },
+    {
+      "id": "incident-api",
+      "label": "Incident API",
+      "subtitle": "Incident ingestion",
+      "groupId": "cloud-response",
+      "asset": "api-service"
+    },
+    {
+      "id": "incident-database",
+      "label": "Incident Database",
+      "subtitle": "Durable incident record",
+      "groupId": "cloud-response",
+      "asset": "database"
+    },
+    {
+      "id": "dashboard",
+      "label": "Dashboard",
+      "subtitle": "Live incident view",
+      "groupId": "cloud-response",
+      "asset": "web-application"
+    },
+    {
+      "id": "operator",
+      "label": "Response Operator",
+      "subtitle": "Human review",
+      "groupId": "cloud-response",
+      "asset": "user"
+    },
+    {
+      "id": "alert-ack",
+      "label": "Alert & Acknowledgement",
+      "subtitle": "ACK / Close",
+      "groupId": "cloud-response",
+      "asset": "monitoring"
+    },
+    {
+      "id": "power",
+      "label": "Power",
+      "subtitle": "System power service",
+      "groupId": "services",
+      "asset": "server"
+    },
+    {
+      "id": "watchdog",
+      "label": "Watchdog",
+      "subtitle": "Liveness supervision",
+      "groupId": "services",
+      "asset": "monitoring"
+    },
+    {
+      "id": "time-sync",
+      "label": "Time Sync",
+      "subtitle": "Clock alignment",
+      "groupId": "services",
+      "asset": "server"
+    },
+    {
+      "id": "configuration",
+      "label": "Configuration",
+      "subtitle": "Runtime settings",
+      "groupId": "services",
+      "asset": "api-service"
+    },
+    {
+      "id": "diagnostics",
+      "label": "Diagnostics",
+      "subtitle": "System diagnostics",
+      "groupId": "services",
+      "asset": "monitoring"
+    }
+  ],
+  "edges": [
+    {
+      "id": "sense-to-esp32",
+      "source": "environmental-sensors",
+      "target": "esp32-sensor",
+      "label": "Sensor readings",
+      "flow": "realtime",
+      "animated": true,
+      "pattern": "dashed"
+    },
+    {
+      "id": "esp32-to-processing",
+      "source": "esp32-sensor",
+      "target": "environment-processing",
+      "label": "Samples",
+      "flow": "realtime",
+      "animated": true,
+      "pattern": "dashed"
+    },
+    {
+      "id": "processing-to-risk",
+      "source": "environment-processing",
+      "target": "environmental-risk",
+      "label": "Risk state",
+      "flow": "realtime",
+      "animated": true,
+      "pattern": "dashed"
+    },
+    {
+      "id": "tx-to-channel",
+      "source": "esp32-tx",
+      "target": "wifi-channel",
+      "label": "Wi-Fi signal",
+      "flow": "realtime",
+      "animated": true,
+      "pattern": "dashed"
+    },
+    {
+      "id": "channel-to-rx",
+      "source": "wifi-channel",
+      "target": "esp32-rx",
+      "label": "CSI signal",
+      "flow": "realtime",
+      "animated": true,
+      "pattern": "dashed"
+    },
+    {
+      "id": "rx-to-callback",
+      "source": "esp32-rx",
+      "target": "csi-callback",
+      "label": "CSI frames",
+      "flow": "realtime",
+      "animated": true,
+      "pattern": "dashed"
+    },
+    {
+      "id": "callback-to-buffer",
+      "source": "csi-callback",
+      "target": "csi-buffer",
+      "label": "I/Q · RSSI · Time · Sequence",
+      "flow": "batch",
+      "animated": true,
+      "pattern": "dashed"
+    },
+    {
+      "id": "buffer-to-normalize",
+      "source": "csi-buffer",
+      "target": "normalize-window",
+      "label": "Quality-approved window",
+      "flow": "batch",
+      "animated": true,
+      "pattern": "dashed"
+    },
+    {
+      "id": "normalize-to-model",
+      "source": "normalize-window",
+      "target": "tinyml-model",
+      "label": "Normalized window",
+      "flow": "realtime",
+      "animated": true,
+      "pattern": "dashed"
+    },
+    {
+      "id": "model-to-activity",
+      "source": "tinyml-model",
+      "target": "activity-confidence",
+      "label": "Class + confidence",
+      "flow": "realtime",
+      "animated": true,
+      "pattern": "dashed"
+    },
+    {
+      "id": "risk-to-fusion",
+      "source": "environmental-risk",
+      "target": "incident-fusion",
+      "label": "Risk",
+      "flow": "realtime",
+      "animated": true,
+      "pattern": "dashed"
+    },
+    {
+      "id": "activity-to-fusion",
+      "source": "activity-confidence",
+      "target": "incident-fusion",
+      "label": "Class + confidence",
+      "flow": "realtime",
+      "animated": true,
+      "pattern": "dashed"
+    },
+    {
+      "id": "health-to-fusion",
+      "source": "sensor-health",
+      "target": "incident-fusion",
+      "label": "Health",
+      "flow": "monitoring",
+      "animated": true,
+      "pattern": "dashed"
+    },
+    {
+      "id": "fusion-to-json",
+      "source": "incident-fusion",
+      "target": "structured-json",
+      "label": "Confirmed incident",
+      "flow": "batch",
+      "animated": true,
+      "pattern": "dashed"
+    },
+    {
+      "id": "json-to-mqtt",
+      "source": "structured-json",
+      "target": "mqtt-https",
+      "label": "Structured incident",
+      "flow": "batch",
+      "animated": true,
+      "pattern": "dashed"
+    },
+    {
+      "id": "mqtt-to-api",
+      "source": "mqtt-https",
+      "target": "incident-api",
+      "label": "MQTT / HTTPS",
+      "flow": "request",
+      "animated": true,
+      "pattern": "dashed"
+    },
+    {
+      "id": "api-to-database",
+      "source": "incident-api",
+      "target": "incident-database",
+      "label": "Persist",
+      "flow": "batch",
+      "animated": true,
+      "pattern": "dashed"
+    },
+    {
+      "id": "database-to-dashboard",
+      "source": "incident-database",
+      "target": "dashboard",
+      "label": "Incident view",
+      "flow": "request",
+      "animated": true,
+      "pattern": "dashed"
+    },
+    {
+      "id": "dashboard-to-operator",
+      "source": "dashboard",
+      "target": "operator",
+      "label": "Notify",
+      "flow": "realtime",
+      "animated": true,
+      "pattern": "dashed"
+    },
+    {
+      "id": "operator-to-alert",
+      "source": "operator",
+      "target": "alert-ack",
+      "label": "Alert response",
+      "flow": "feedback",
+      "animated": true,
+      "pattern": "dashed"
+    },
+    {
+      "id": "ack-to-fusion",
+      "source": "alert-ack",
+      "target": "incident-fusion",
+      "label": "ACK / Close",
+      "flow": "feedback",
+      "animated": true,
+      "pattern": "dashed"
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "title": "Real-Time IoT Safety Platform",
+  "theme": "animated-sketch-dark",
+  "layout": "edge-cloud",
+  "outputFile": "iot-safety.drawio",
+  "overwrite": true,
+  "onlineAssets": false,
+  "groups": [
+    {
+      "id": "edge",
+      "label": "Edge Devices",
+      "subtitle": "Local sensing and resilient collection"
+    },
+    {
+      "id": "cloud",
+      "label": "Cloud Platform",
+      "subtitle": "Ingestion, intelligence and storage"
+    },
+    {
+      "id": "users",
+      "label": "User Experience",
+      "subtitle": "Live safety response"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "sensor",
+      "label": "IoT Sensor",
+      "subtitle": "GPS + IMU",
+      "groupId": "edge",
+      "asset": "iot-sensor"
+    },
+    {
+      "id": "mobile",
+      "label": "Mobile Device",
+      "subtitle": "Background collector",
+      "groupId": "edge",
+      "asset": "mobile-device"
+    },
+    {
+      "id": "gateway",
+      "label": "Edge Gateway",
+      "subtitle": "Store and forward",
+      "groupId": "edge",
+      "asset": "server"
+    },
+    {
+      "id": "broker",
+      "label": "Message Broker",
+      "subtitle": "MQTT ingestion",
+      "groupId": "cloud",
+      "asset": "message-queue"
+    },
+    {
+      "id": "api",
+      "label": "Safety API",
+      "subtitle": "Realtime decisions",
+      "groupId": "cloud",
+      "asset": "api-service"
+    },
+    {
+      "id": "model",
+      "label": "Risk Model",
+      "subtitle": "Event classification",
+      "groupId": "cloud",
+      "asset": "ai-model"
+    },
+    {
+      "id": "database",
+      "label": "Telemetry Store",
+      "subtitle": "Trips and incidents",
+      "groupId": "cloud",
+      "asset": "database"
+    },
+    {
+      "id": "monitoring",
+      "label": "Observability",
+      "subtitle": "Metrics and alerts",
+      "groupId": "cloud",
+      "asset": "monitoring"
+    },
+    {
+      "id": "dashboard",
+      "label": "Safety Dashboard",
+      "subtitle": "Live fleet view",
+      "groupId": "users",
+      "asset": "web-application"
+    },
+    {
+      "id": "responder",
+      "label": "Emergency Contact",
+      "subtitle": "Verified notification",
+      "groupId": "users",
+      "asset": "user"
+    }
+  ],
+  "edges": [
+    {
+      "id": "sensor-data",
+      "source": "sensor",
+      "target": "mobile",
+      "label": "BLE samples",
+      "flow": "realtime"
+    },
+    {
+      "id": "edge-upload",
+      "source": "mobile",
+      "target": "gateway",
+      "label": "Buffered telemetry",
+      "flow": "batch"
+    },
+    {
+      "id": "mqtt-stream",
+      "source": "gateway",
+      "target": "broker",
+      "label": "MQTT/TLS",
+      "flow": "realtime"
+    },
+    {
+      "id": "broker-api",
+      "source": "broker",
+      "target": "api",
+      "label": "Events",
+      "flow": "realtime"
+    },
+    {
+      "id": "model-request",
+      "source": "api",
+      "target": "model",
+      "label": "Classify",
+      "flow": "request"
+    },
+    {
+      "id": "persist",
+      "source": "api",
+      "target": "database",
+      "label": "Incident record",
+      "flow": "batch"
+    },
+    {
+      "id": "metrics",
+      "source": "api",
+      "target": "monitoring",
+      "label": "Metrics + traces",
+      "flow": "monitoring"
+    },
+    {
+      "id": "dashboard-feed",
+      "source": "api",
+      "target": "dashboard",
+      "label": "Live updates",
+      "flow": "realtime"
+    },
+    {
+      "id": "emergency-alert",
+      "source": "api",
+      "target": "responder",
+      "label": "Verified alert",
+      "flow": "feedback"
+    }
+  ]
+}
