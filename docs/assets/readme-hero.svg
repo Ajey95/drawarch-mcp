@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="620" viewBox="0 0 1440 620" role="img" aria-labelledby="title desc">
+  <title id="title">DrawArch transforms a reference architecture image into an editable Draw.io diagram</title>
+  <desc id="desc">A visual workflow showing a reference image on the left, DrawArch in the center, and separate editable architecture components connected on the right.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07111f"/>
+      <stop offset="0.52" stop-color="#0b1730"/>
+      <stop offset="1" stop-color="#11123b"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <linearGradient id="cardGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1e293b" stop-opacity="0.96"/>
+      <stop offset="1" stop-color="#0f172a" stop-opacity="0.96"/>
+    </linearGradient>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#94a3b8" stroke-opacity="0.08"/>
+    </pattern>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#020617" flood-opacity="0.55"/>
+    </filter>
+    <filter id="cyanGlow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="11" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0l10 5-10 5z" fill="#22d3ee"/>
+    </marker>
+  </defs>
+
+  <rect width="1440" height="620" rx="32" fill="url(#bg)"/>
+  <rect width="1440" height="620" rx="32" fill="url(#grid)"/>
+  <circle cx="1190" cy="42" r="260" fill="#7c3aed" opacity="0.08"/>
+  <circle cx="210" cy="640" r="300" fill="#0891b2" opacity="0.07"/>
+
+  <g font-family="Inter,Segoe UI,Arial,sans-serif" text-anchor="middle">
+    <g transform="translate(720 76)">
+      <rect x="-105" y="-24" width="210" height="37" rx="18.5" fill="#172554" stroke="#2563eb"/>
+      <circle cx="-79" cy="-5.5" r="5" fill="#22d3ee"/>
+      <text x="10" y="1" fill="#bfdbfe" font-size="14" font-weight="700" letter-spacing="2">OPEN-SOURCE MCP SERVER</text>
+    </g>
+    <text x="720" y="134" fill="#f8fafc" font-size="52" font-weight="800" letter-spacing="-1.6">Architecture diagrams you can actually edit.</text>
+    <text x="720" y="171" fill="#94a3b8" font-size="20">Reference image in. Native Draw.io out. Every object stays yours.</text>
+  </g>
+
+  <!-- Reference card -->
+  <g filter="url(#shadow)" transform="translate(70 218)">
+    <rect width="440" height="328" rx="22" fill="url(#cardGlow)" stroke="#334155" stroke-width="1.5"/>
+    <circle cx="27" cy="26" r="5" fill="#fb7185"/><circle cx="45" cy="26" r="5" fill="#fbbf24"/><circle cx="63" cy="26" r="5" fill="#4ade80"/>
+    <text x="220" y="32" fill="#94a3b8" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="13" text-anchor="middle">REFERENCE IMAGE</text>
+    <rect x="22" y="51" width="396" height="251" rx="13" fill="#f8fafc"/>
+    <text x="220" y="79" fill="#0f172a" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" text-anchor="middle">SYSTEM ARCHITECTURE</text>
+    <rect x="42" y="99" width="148" height="76" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+    <circle cx="67" cy="130" r="12" fill="#0284c7"/><path d="M59 130h16M67 122v16" stroke="#fff" stroke-width="2"/>
+    <text x="128" y="128" fill="#0f172a" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="700" text-anchor="middle">Edge Sensors</text>
+    <text x="128" y="146" fill="#64748b" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="9" text-anchor="middle">ESP32 · Wi-Fi CSI</text>
+    <rect x="250" y="99" width="148" height="76" rx="8" fill="#ede9fe" stroke="#7c3aed"/>
+    <path d="M275 119l13 8-13 8-13-8zM262 137l13 8 13-8" fill="none" stroke="#7c3aed" stroke-width="2"/>
+    <text x="335" y="128" fill="#0f172a" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="700" text-anchor="middle">Edge Intelligence</text>
+    <text x="335" y="146" fill="#64748b" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="9" text-anchor="middle">TinyML · Confidence</text>
+    <path d="M190 137h54" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+    <rect x="142" y="209" width="156" height="69" rx="8" fill="#dcfce7" stroke="#16a34a"/>
+    <path d="M167 230h24v18h-24zM171 226h16" fill="none" stroke="#16a34a" stroke-width="2"/>
+    <text x="235" y="238" fill="#0f172a" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="700" text-anchor="middle">Cloud Response</text>
+    <text x="235" y="256" fill="#64748b" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="9" text-anchor="middle">MQTT · Alerting</text>
+    <path d="M128 175v27h93" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="5 4"/>
+    <path d="M335 175v27H221v7" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- DrawArch engine -->
+  <g transform="translate(591 296)" font-family="Inter,Segoe UI,Arial,sans-serif" text-anchor="middle">
+    <path d="M-63 88H-7" stroke="#22d3ee" stroke-width="3" stroke-dasharray="7 7" marker-end="url(#arrow)"/>
+    <path d="M265 88h56" stroke="#22d3ee" stroke-width="3" stroke-dasharray="7 7" marker-end="url(#arrow)"/>
+    <rect x="0" y="0" width="258" height="178" rx="28" fill="#101b36" stroke="url(#brand)" stroke-width="2.5" filter="url(#cyanGlow)"/>
+    <g transform="translate(129 52)">
+      <path d="M-28-19h36l20 19-20 19h-36l-20-19z" fill="none" stroke="url(#brand)" stroke-width="4"/>
+      <path d="M-22-7h19M-22 0h31M-22 7h25" stroke="#e0f2fe" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <text x="129" y="102" fill="#fff" font-size="27" font-weight="800">DrawArch</text>
+    <text x="129" y="126" fill="#67e8f9" font-size="12" font-weight="700" letter-spacing="2">MCP</text>
+    <g fill="#cbd5e1" font-size="11">
+      <text x="129" y="151">plan · approve · embed · validate</text>
+    </g>
+  </g>
+
+  <!-- Editable result -->
+  <g filter="url(#shadow)" transform="translate(930 218)">
+    <rect width="440" height="328" rx="22" fill="url(#cardGlow)" stroke="#334155" stroke-width="1.5"/>
+    <circle cx="27" cy="26" r="5" fill="#fb7185"/><circle cx="45" cy="26" r="5" fill="#fbbf24"/><circle cx="63" cy="26" r="5" fill="#4ade80"/>
+    <text x="220" y="32" fill="#94a3b8" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="13" text-anchor="middle">EDITABLE .DRAWIO</text>
+    <rect x="22" y="51" width="396" height="251" rx="13" fill="#f8fafc"/>
+    <path d="M22 83h396" stroke="#e2e8f0"/>
+    <g fill="#64748b" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="9">
+      <text x="41" y="72">File</text><text x="70" y="72">Edit</text><text x="99" y="72">View</text>
+    </g>
+    <rect x="43" y="104" width="138" height="76" rx="9" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+    <circle cx="68" cy="135" r="12" fill="#0284c7"/><path d="M60 135h16M68 127v16" stroke="#fff" stroke-width="2"/>
+    <text x="126" y="137" fill="#0f172a" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="11" font-weight="700" text-anchor="middle">Edge Sensors</text>
+    <rect x="258" y="104" width="138" height="76" rx="9" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+    <path d="M278 124l13 8-13 8-13-8zM265 142l13 8 13-8" fill="none" stroke="#7c3aed" stroke-width="2"/>
+    <text x="336" y="137" fill="#0f172a" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="11" font-weight="700" text-anchor="middle">Edge Intelligence</text>
+    <path d="M181 142h70" stroke="#2563eb" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+    <rect x="151" y="216" width="150" height="62" rx="9" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="226" y="246" fill="#0f172a" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="11" font-weight="700" text-anchor="middle">Cloud Response</text>
+    <path d="M112 180v28h114" stroke="#2563eb" stroke-width="2.5" fill="none"/>
+    <path d="M327 180v28H226v8" stroke="#2563eb" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+    <!-- Selection handles prove independent editability -->
+    <g fill="#fff" stroke="#2563eb" stroke-width="1.5">
+      <rect x="38" y="99" width="9" height="9"/><rect x="177" y="99" width="9" height="9"/><rect x="38" y="176" width="9" height="9"/><rect x="177" y="176" width="9" height="9"/>
+    </g>
+    <g transform="translate(295 286)" font-family="Inter,Segoe UI,Arial,sans-serif">
+      <rect width="106" height="27" rx="13.5" fill="#052e16" stroke="#22c55e"/>
+      <circle cx="16" cy="13.5" r="5" fill="#22c55e"/>
+      <path d="M13.5 13.5l2 2 4-5" fill="none" stroke="#052e16" stroke-width="1.6"/>
+      <text x="62" y="17.5" fill="#bbf7d0" font-size="10" font-weight="700" text-anchor="middle">VALIDATED</text>
+    </g>
+  </g>
+
+  <g transform="translate(720 585)" font-family="Inter,Segoe UI,Arial,sans-serif" text-anchor="middle">
+    <text fill="#64748b" font-size="13" letter-spacing="1.3">REAL ICONS  ·  NATIVE CELLS  ·  PORTABLE OUTPUT  ·  NO SECOND LLM KEY</text>
+  </g>
+</svg>
