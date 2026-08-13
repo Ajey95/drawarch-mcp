@@ -15,11 +15,11 @@
 - [x] Raster inputs are bounded and re-encoded with patched Sharp.
 - [x] `npm audit --audit-level=high` reports zero vulnerabilities.
 - [x] `npm pack --dry-run` includes the executable build, assets, docs, and `server.json`.
-- [ ] Docker image runtime smoke test (Docker daemon was unavailable on the verification machine).
+- [x] Docker image build passes in hosted Linux CI (local Docker daemon was unavailable).
 
 ## Publication
 
-- [ ] Public GitHub repository pushed and CI green.
+- [x] Public GitHub repository pushed and CI green on Windows/Linux with Node 20/22 plus Docker build.
 - [ ] `drawarch-mcp@0.2.0` published to npm.
 - [ ] `io.github.Ajey95/drawarch` published to the Official MCP Registry.
 - [ ] Durable remote HTTPS endpoint deployed and tested from an external MCP host.
