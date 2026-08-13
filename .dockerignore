@@ -1,0 +1,10 @@
+.git
+.github
+.worktrees
+node_modules
+dist
+outputs
+.drawarch-output
+.env*
+*.tgz
+coverage

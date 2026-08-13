@@ -1,8 +1,8 @@
 # DrawArch MCP — Product Requirements Document
 
-**Status:** Approved for V1 implementation  
-**Version:** 1.0  
-**Date:** 2026-08-10  
+**Status:** V1 retained; V2 reference-recreation amendment implemented  
+**Version:** 2.0  
+**Date:** 2026-08-14  
 **Owner:** Product team  
 **Authority:** This file is the single source of truth for product scope, behavior, acceptance criteria, and release boundaries. Implementation plans and code must reference this document and must not redefine requirements elsewhere.
 
@@ -292,18 +292,21 @@ V1 is releasable when all of the following are demonstrated:
 11. Installation and MCP client configuration are documented.
 12. The distributable ZIP excludes dependency folders, caches, secrets, and generated temporary files.
 
-## 18. V2 Roadmap
+## 18. V2 Reference-Recreation Amendment
 
-V2 adds codebase and GitHub architecture reverse-engineering:
+V2 adds a separate reference-image recreation pipeline while retaining every V1 tool:
 
-- Inspect local repositories and authorized GitHub repositories.
-- Identify services, frameworks, databases, queues, APIs, deployments, and infrastructure.
-- Build an evidence-linked architecture graph.
-- Mark inferred relationships with confidence and source references.
-- Compare the inferred graph with an existing `.drawio` file.
-- Propose or apply incremental diagram updates while preserving manual edits.
+- The connected MCP host's vision-capable LLM analyzes a user-provided image; DrawArch does not call or require another LLM API.
+- The host supplies a typed absolute scene graph containing canvas, layers, z-order, confidence, editable shapes/text/assets/containers, and port-aware connectors with waypoints.
+- Plans are persisted as immutable revisions. Rendering requires an HMAC approval token bound to the exact revision, and updates invalidate prior approvals.
+- Asset modes include bundled icons, opt-in Iconify-compatible online icons, user data URIs, and approved HTTPS images.
+- All images are sanitized, bounded, attributed, and embedded. HTTPS fetching revalidates DNS across redirects and rejects private/reserved targets.
+- The renderer preserves exact coordinates and produces independent native Draw.io cells.
+- Validation and structural comparison must meet the plan's minimum fidelity score before output is accepted.
+- Generated `.drawio` bytes are returned directly as a portable MCP resource.
+- The same eleven tools run locally over stdio or remotely over authenticated Streamable HTTP.
 
-V2 must be designed as a separate subsystem; it consumes the same V1 architecture schema and renderer instead of bypassing them.
+Pixel-level visual iteration is performed by the host vision model by inspecting output and revising the plan; DrawArch guarantees deterministic rendering and structural coverage, not cross-version pixel identity.
 
 ## 19. Success Measures
 

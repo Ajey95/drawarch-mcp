@@ -1,65 +1,39 @@
 # DrawArch MCP
 
-DrawArch MCP generates polished, animated, natively editable diagrams.net architecture diagrams. An MCP-capable AI agent supplies a structured system graph; DrawArch selects real SVG assets, applies a deterministic layout and theme, creates colour-coded animated datapaths, embeds every asset, validates the result, and writes a portable `.drawio` file.
+[![CI](https://github.com/Ajey95/drawarch-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/Ajey95/drawarch-mcp/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/drawarch-mcp)](https://www.npmjs.com/package/drawarch-mcp)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-The `.drawio` file is the product. PNG, SVG, and animated GIF exports can be produced later from diagrams.net without flattening the editable source.
+DrawArch turns architecture descriptions and reference images into portable, natively editable diagrams.net (`.drawio`) files through the Model Context Protocol.
 
-## What V1 includes
+The connected ChatGPT, Claude, Codex, Cursor, or other MCP host does the visual reasoning. DrawArch does **not** require or call a second LLM API. It validates the host model's scene graph, resolves and safely embeds real icons or images, renders exact absolute geometry, checks fidelity, and returns the `.drawio` file directly as an MCP artifact.
 
-- Five MCP tools over local stdio
-- Six selectable visual themes
-- Five deterministic architecture layouts
-- Twelve bundled original SVG assets
-- Bundled-first and opt-in Iconify-compatible online asset resolution
-- Embedded SVG data URIs—no hotlinked image dependency
-- Native diagrams.net connector flow animation
-- Editable subsystem groups, node cards, image cells, labels, edges, and legends
-- Safe output paths, overwrite protection, atomic writes, and structural validation
-- A complete IoT safety example
+## Why DrawArch
 
-The authoritative product scope and V2 boundary are in [`PRD.md`](PRD.md).
+- Recreate a supplied reference image as independent editable shapes, text, icons, containers, and connectors.
+- Generate architecture diagrams from structured components and flows.
+- Use bundled icons, opt-in Iconify-compatible online icons, user-provided images, or approved HTTPS image URLs.
+- Keep every asset inside the `.drawio` file; outputs do not depend on hotlinks.
+- Run locally over stdio or as a shared Streamable HTTP MCP server.
+- Protect remote deployments with bearer authentication, host/origin allowlists, SSRF controls, size limits, SVG sanitization, and raster re-encoding.
+- Preserve approved plans as immutable revisions and reject stale approval tokens.
 
-## Requirements
+## Quick start
 
-- Node.js 22 or newer
-- npm 10 or newer
-- A current diagrams.net editor to open generated files
-- An MCP host such as ChatGPT/Codex, Claude Desktop/Code, VS Code, or Cursor
-
-## Install and build
+Requires Node.js 20 or newer.
 
 ```bash
-npm install
-npm test
-npm run build
+npx -y drawarch-mcp
 ```
 
-Generate the bundled example:
-
-```bash
-npm run sample
-```
-
-The result is `examples/iot-safety.drawio`.
-
-## Run as an MCP server
-
-The built server uses stdio. stdout is reserved for MCP messages; diagnostics go to stderr.
-
-```bash
-DRAWARCH_OUTPUT_DIR="/absolute/path/to/diagrams" npm start
-```
-
-### MCP host configuration
-
-Build the project, replace the two absolute paths below, and add this entry to your host's MCP configuration:
+Local MCP configuration:
 
 ```json
 {
   "mcpServers": {
     "drawarch": {
-      "command": "node",
-      "args": ["/absolute/path/to/drawarch-mcp/dist/src/index.js"],
+      "command": "npx",
+      "args": ["-y", "drawarch-mcp"],
       "env": {
         "DRAWARCH_OUTPUT_DIR": "/absolute/path/to/diagrams",
         "DRAWARCH_ONLINE_ASSETS": "false"
@@ -69,189 +43,108 @@ Build the project, replace the two absolute paths below, and add this entry to y
 }
 ```
 
-For development without building:
+For an unpublished checkout, run `npm install && npm run build`, then replace the command with `node` and the args with the absolute path to `dist/src/index.js`.
 
-```json
-{
-  "mcpServers": {
-    "drawarch-dev": {
-      "command": "node",
-      "args": ["--import", "tsx", "/absolute/path/to/drawarch-mcp/src/index.ts"],
-      "env": {
-        "DRAWARCH_OUTPUT_DIR": "/absolute/path/to/diagrams"
-      }
-    }
-  }
-}
+## Reference-image workflow
+
+Attach an image to your MCP host and ask it to recreate the image with DrawArch. The intended tool sequence is:
+
+1. The host vision model analyzes the image and calls `prepare_reference_recreation` with an absolute scene graph.
+2. The host or user reviews the plan and approved asset sources. An approved preparation returns a revision-bound token.
+3. The host calls `create_reference_drawio`; DrawArch resolves and embeds assets, renders exact coordinates, validates the file, and returns it as a resource.
+4. `compare_reference_recreation` reports structural coverage. The host can revise the plan and repeat until the target is met.
+
+Each visible object remains editable. Connectors retain source/target attachment, ports, and waypoints. See [the complete reference-plan example](examples/reference-recreation.json).
+
+## Run a shared remote MCP server
+
+```bash
+DRAWARCH_TRANSPORT=http \
+HOST=0.0.0.0 \
+PORT=3000 \
+DRAWARCH_API_KEY=replace-with-a-long-random-secret \
+DRAWARCH_APPROVAL_SECRET=replace-with-another-random-secret \
+DRAWARCH_ALLOWED_HOSTS=drawarch.example.com \
+DRAWARCH_ALLOWED_ORIGINS=chatgpt.com,claude.ai \
+DRAWARCH_ONLINE_ASSETS=true \
+npx -y drawarch-mcp
 ```
 
-## Environment variables
+Endpoints:
 
-| Variable | Default | Meaning |
-|---|---:|---|
-| `DRAWARCH_OUTPUT_DIR` | `.drawarch-output` | Only directory in which tools may read/write `.drawio` files |
-| `DRAWARCH_ONLINE_ASSETS` | `false` | Enables approved online SVG lookup when set to `true` |
-| `DRAWARCH_ICONIFY_BASE_URL` | `https://api.iconify.design` | HTTPS Iconify-compatible provider URL |
+- `POST /mcp` — Streamable HTTP MCP
+- `GET /health` — public health probe
+- `GET /files/<safe-name>.drawio` — authenticated output download
 
-Online access is opt-in twice: the server must enable it and the individual asset/generation request must set `allowOnline`/`onlineAssets`.
+Connect ChatGPT or Claude to `https://drawarch.example.com/mcp` and set `Authorization: Bearer <DRAWARCH_API_KEY>` in the connector configuration. ChatGPT cannot directly spawn a local stdio process; use the remote server for ChatGPT, or a supported development tunnel while testing.
+
+Docker:
+
+```bash
+docker build -t drawarch-mcp .
+docker run --rm -p 3000:3000 \
+  -e DRAWARCH_API_KEY=replace-me \
+  -e DRAWARCH_APPROVAL_SECRET=replace-me-too \
+  -e DRAWARCH_ALLOWED_HOSTS=localhost,127.0.0.1 \
+  -v drawarch-data:/data \
+  drawarch-mcp
+```
 
 ## MCP tools
 
-### `list_themes`
-
-Lists selectable themes with IDs, descriptions, and background colours.
-
-### `list_assets`
-
-Searches the bundled catalogue. Parameters:
-
-- `query` — optional text such as `postgres`, `smartphone`, or `telemetry`
-- `category` — optional exact category
-- `provider` — optional exact provider
-
-### `resolve_asset`
-
-Resolves one component to a bundled or online SVG and returns provenance without returning the full asset bytes.
-
-- `query` — required component/icon description
-- `category` — optional generic fallback category
-- `provider` — optional provider preference
-- `allowOnline` — defaults to `false`
-
-### `create_drawio`
-
-Creates a `.drawio` file from the architecture schema documented below. The output name must be a basename such as `platform.drawio`; nested paths and traversal are rejected.
-
-### `validate_drawio`
-
-Validates one `.drawio` file inside `DRAWARCH_OUTPUT_DIR` for malformed structure, duplicate cell IDs, dangling connectors, hotlinked images, absolute local paths, and missing root cells.
-
-## Architecture input
-
-The MCP host's LLM translates a natural-language request into this structured graph. DrawArch itself does not call an LLM and never asks one to write raw XML.
-
-```json
-{
-  "title": "Realtime Platform",
-  "theme": "animated-sketch-dark",
-  "layout": "edge-cloud",
-  "outputFile": "realtime-platform.drawio",
-  "overwrite": false,
-  "onlineAssets": false,
-  "groups": [
-    { "id": "edge", "label": "Edge" },
-    { "id": "cloud", "label": "Cloud" }
-  ],
-  "nodes": [
-    {
-      "id": "sensor",
-      "label": "Sensor",
-      "subtitle": "GPS + IMU",
-      "groupId": "edge",
-      "asset": "iot-sensor"
-    },
-    {
-      "id": "api",
-      "label": "API",
-      "groupId": "cloud",
-      "asset": "api-service"
-    }
-  ],
-  "edges": [
-    {
-      "id": "telemetry",
-      "source": "sensor",
-      "target": "api",
-      "label": "MQTT",
-      "flow": "realtime",
-      "animated": true
-    }
-  ]
-}
-```
-
-See [`examples/iot-safety.json`](examples/iot-safety.json) for a multi-group, multi-flow example.
-
-## Themes
-
-| Theme ID | Intended use |
+| Tool | Purpose |
 |---|---|
-| `animated-sketch-dark` | Signature black hand-drawn animated style |
-| `animated-sketch-light` | Whiteboard-style sketch diagram |
-| `professional-cloud` | Formal cloud and solution architecture |
-| `minimal-corporate` | Neutral reports and presentations |
-| `technical-blueprint` | Engineering and hardware diagrams |
-| `presentation-neon` | High-contrast live demos |
+| `list_themes` | List six built-in diagram themes. |
+| `list_assets` | Search the bundled real-world icon catalog. |
+| `resolve_asset` | Resolve a bundled or opt-in online icon with provenance. |
+| `create_drawio` | Generate a deterministic themed architecture diagram. |
+| `validate_drawio` | Validate a generated architecture file. |
+| `prepare_reference_recreation` | Store an absolute editable scene graph and optionally approve its sources. |
+| `update_reference_plan` | Create an immutable next revision; prior approvals become stale. |
+| `get_reference_plan` | Read the current revision for review. |
+| `create_reference_drawio` | Render an approved reference plan and return the `.drawio` artifact. |
+| `validate_reference_drawio` | Validate a recreated file. |
+| `compare_reference_recreation` | Score structural coverage against the plan. |
 
-A theme changes only visual tokens. It never changes components or connections.
+## Asset modes
 
-## Layouts
+Reference assets support four explicit modes:
 
-| Layout ID | Behavior |
-|---|---|
-| `horizontal` | Left-to-right architecture flow |
-| `vertical` | Top-to-bottom architecture flow |
-| `edge-cloud` | Group columns for edge, cloud, and users |
-| `hub-spoke` | First node at the hub, remaining nodes around it |
-| `pipeline` | Ordered processing stages |
+- `bundled`: a DrawArch-owned MIT SVG selected by query.
+- `online`: an Iconify-compatible SVG selected by query; server opt-in is required.
+- `data`: a user-supplied SVG, PNG, JPEG, or WebP data URI.
+- `remote`: an approved HTTPS image URL; server opt-in is required.
 
-## Flow types
+Remote fetching rejects credentials, non-HTTPS URLs, custom ports, private/reserved DNS answers, unsafe redirects, oversized content, active SVG content, and excessive raster dimensions. Raster images are decoded and re-encoded before embedding. Online assets retain their provider/license metadata; users remain responsible for verifying third-party license terms.
 
-`request`, `realtime`, `batch`, `feedback`, `monitoring`, and `dependency` have distinct theme-aware colours. Edges can override colour, solid/dashed/dotted pattern, animation, duration, timing, and direction. A legend is generated when multiple flow types are used.
+## Configuration
 
-## Bundled assets
-
-V1 ships original MIT-licensed SVGs for user, mobile device, web application, API/service, server, database, message queue, object storage, cloud, AI model, IoT sensor, and monitoring.
-
-Resolution order:
-
-1. Exact bundled ID
-2. Bundled alias/tag semantic match
-3. Online search when both server and request enable it
-4. Generic bundled category fallback
-5. Actionable resolution error
-
-Online SVGs are restricted to HTTPS, time-limited, byte-limited, redirect-limited, sanitized, hashed, and embedded. Scripts, event handlers, `foreignObject`, unsafe links, and external image dependencies are rejected.
+| Variable | Default | Meaning |
+|---|---|---|
+| `DRAWARCH_TRANSPORT` | `stdio` | `stdio` or `http`. |
+| `DRAWARCH_OUTPUT_DIR` | `.drawarch-output` | Restricted output and plan-storage directory. |
+| `DRAWARCH_ONLINE_ASSETS` | `false` | Enables opt-in online and remote image sources. |
+| `DRAWARCH_ICONIFY_BASE_URL` | Iconify API | HTTPS Iconify-compatible provider. |
+| `HOST` | `127.0.0.1` | HTTP bind host. |
+| `PORT` | `3000` | HTTP port. |
+| `DRAWARCH_API_KEY` | unset | Optional bearer token for `/mcp` and `/files`. Required for internet exposure. |
+| `DRAWARCH_APPROVAL_SECRET` | random/process | HMAC secret for revision-bound approvals; set it for shared deployments. |
+| `DRAWARCH_ALLOWED_HOSTS` | local hosts | Comma-separated accepted Host values. |
+| `DRAWARCH_ALLOWED_ORIGINS` | local origins | Comma-separated accepted Origin hosts. |
+| `DRAWARCH_PUBLIC_BASE_URL` | listener URL | Public base URL advertised by the process. |
 
 ## Development
 
 ```bash
-npm test                  # all unit and integration tests
-npm test -- tests/layout.test.ts
+npm install
+npm test
 npm run build
 npm run sample
+npm pack --dry-run
 ```
 
-The stdio integration test starts the real server process with the official MCP client and invokes all five tools.
+Architecture and security details are in [ARCHITECTURE.md](docs/ARCHITECTURE.md). Contributions are welcome; read [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), and the [Code of Conduct](CODE_OF_CONDUCT.md).
 
-## Troubleshooting
+## License
 
-### The host cannot start the server
-
-- Run `npm run build` again.
-- Confirm the configured path ends in `dist/src/index.js`.
-- Use absolute paths in MCP host configuration.
-- Confirm Node.js is available in the host's environment.
-
-### An icon cannot be found
-
-- Call `list_assets` with a shorter alias.
-- Provide a `category` for a safe generic fallback.
-- Enable online resolution at the server and request levels.
-- Use an exact Iconify-compatible asset query/provider.
-
-### Output already exists
-
-Set `overwrite: true` only when replacement is intentional. Generation otherwise protects existing files.
-
-### The animation is not visible
-
-Open the file in a current diagrams.net release and ensure animations are enabled in the editor's View/Settings menu. The animation properties remain stored even if the editor temporarily hides visual animations.
-
-## V2
-
-V2 will inspect authorized local/GitHub codebases, infer architecture with evidence and confidence, compare it with existing diagrams, and propose incremental updates while preserving manual edits. V2 will consume the same V1 schema and renderer.
-
-## Licence
-
-DrawArch-owned code and bundled SVGs are MIT licensed. Online assets retain their provider/collection licence metadata and source attribution inside generated image cells.
+DrawArch code and bundled assets are MIT licensed. Third-party assets keep their own provider licenses and attribution.

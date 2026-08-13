@@ -1,0 +1,50 @@
+{
+  "title": "Reference recreation",
+  "outputFile": "reference-recreation.drawio",
+  "canvas": { "width": 1200, "height": 800, "background": "#ffffff" },
+  "layers": [{ "id": "main", "label": "Main", "zIndex": 0 }],
+  "elements": [
+    {
+      "id": "gateway",
+      "type": "shape",
+      "layerId": "main",
+      "x": 100, "y": 160, "width": 260, "height": 150,
+      "zIndex": 1, "confidence": 0.98,
+      "label": "API Gateway",
+      "shape": "roundedRectangle",
+      "style": { "fillColor": "#ffffff", "strokeColor": "#111827", "fontColor": "#111827" }
+    },
+    {
+      "id": "cloud-icon",
+      "type": "asset",
+      "layerId": "main",
+      "x": 190, "y": 185, "width": 80, "height": 60,
+      "zIndex": 2, "confidence": 0.95,
+      "label": "Cloud",
+      "asset": { "mode": "online", "query": "mdi:cloud", "provider": "mdi" }
+    },
+    {
+      "id": "database",
+      "type": "shape",
+      "layerId": "main",
+      "x": 760, "y": 160, "width": 260, "height": 150,
+      "zIndex": 1, "confidence": 0.98,
+      "label": "Database",
+      "shape": "cylinder",
+      "style": { "fillColor": "#f8fafc", "strokeColor": "#111827" }
+    },
+    {
+      "id": "request",
+      "type": "connector",
+      "layerId": "main",
+      "zIndex": 0, "confidence": 0.96,
+      "source": "gateway", "target": "database",
+      "sourcePort": "east", "targetPort": "west",
+      "waypoints": [{ "x": 570, "y": 235 }],
+      "label": "HTTPS",
+      "style": { "strokeColor": "#2563eb", "width": 2, "dashed": true, "endArrow": "block" }
+    }
+  ],
+  "fidelity": { "minimumStructuralScore": 1, "notes": ["Match exact spacing and labels from the attached reference."] },
+  "overwrite": false
+}

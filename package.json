@@ -1,7 +1,14 @@
 {
   "name": "drawarch-mcp",
-  "version": "0.1.0",
-  "description": "MCP server for animated, themed, editable diagrams.net architecture diagrams",
+  "version": "0.2.0",
+  "description": "MCP server for editable Draw.io architecture diagrams and exact reference-image recreations",
+  "mcpName": "io.github.Ajey95/drawarch",
+  "license": "MIT",
+  "author": "DrawArch contributors",
+  "repository": { "type": "git", "url": "git+https://github.com/Ajey95/drawarch-mcp.git" },
+  "homepage": "https://github.com/Ajey95/drawarch-mcp#readme",
+  "bugs": { "url": "https://github.com/Ajey95/drawarch-mcp/issues" },
+  "keywords": ["mcp", "model-context-protocol", "drawio", "diagrams.net", "architecture", "reference-image"],
   "type": "module",
   "bin": {
     "drawarch-mcp": "dist/src/index.js"
@@ -11,6 +18,9 @@
     "src/assets/svg",
     "README.md",
     "PRD.md",
+    "server.json",
+    "CHANGELOG.md",
+    "SECURITY.md",
     "LICENSE"
   ],
   "scripts": {
@@ -18,10 +28,12 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "start": "node dist/src/index.js",
-    "sample": "node --import tsx scripts/generate-sample.ts"
+    "sample": "node --import tsx scripts/generate-sample.ts",
+    "check": "npm test && npm run build && npm audit --audit-level=high && npm pack --dry-run",
+    "prepublishOnly": "npm test && npm run build"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=20"
   },
   "dependencies": {
     "@modelcontextprotocol/node": "^2.0.0",
