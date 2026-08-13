@@ -8,6 +8,7 @@ import { listBundledAssets, searchBundledAssets } from "./assets/catalog.js";
 import { IconifyProvider } from "./assets/online.js";
 import { AssetResolver } from "./assets/resolver.js";
 import { ArchitectureSpecSchema } from "./domain/schema.js";
+import { drawioArtifact } from "./files/artifact.js";
 import { resolveOutputPath } from "./files/output.js";
 import { listThemes } from "./themes/themes.js";
 import { validateDrawio } from "./validate/drawio.js";
@@ -169,6 +170,7 @@ export function createServer(options: DrawArchServerOptions): McpServer {
       if (input.onlineAssets && !options.onlineAssets) return failure("ONLINE_ASSETS_DISABLED", "Online asset resolution is disabled by server configuration");
       try {
         const generated = await service.generate(input);
+        const artifact = drawioArtifact(input.outputFile, await readFile(generated.outputPath, "utf8"));
         return success({
           outputFile: input.outputFile,
           outputPath: generated.outputPath,
@@ -178,7 +180,14 @@ export function createServer(options: DrawArchServerOptions): McpServer {
           warnings: [...generated.warnings],
           assets: generated.assets.map((asset) => ({ ...asset })),
           validation: generated.validation,
-        });
+        }, [{
+          type: "resource",
+          resource: {
+            uri: artifact.uri,
+            mimeType: artifact.mimeType,
+            blob: artifact.blob,
+          },
+        }]);
       } catch (error) {
         return failure("DRAWIO_GENERATION_FAILED", errorMessage(error));
       }
@@ -223,9 +232,18 @@ function assetSummary(asset: ReturnType<typeof listBundledAssets>[number]) {
   };
 }
 
-function success<T extends Record<string, unknown>>(output: T) {
+type ExtraContent = {
+  readonly type: "resource";
+  readonly resource: {
+    readonly uri: string;
+    readonly mimeType: string;
+    readonly blob: string;
+  };
+};
+
+function success<T extends Record<string, unknown>>(output: T, extraContent: readonly ExtraContent[] = []) {
   return {
-    content: [{ type: "text" as const, text: JSON.stringify(output) }],
+    content: [{ type: "text" as const, text: JSON.stringify(output) }, ...extraContent],
     structuredContent: output,
   };
 }

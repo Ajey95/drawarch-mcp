@@ -73,6 +73,13 @@ describe("DrawArch MCP stdio server", () => {
     expect(creation.outputFile).toBe("mcp-test.drawio");
     expect(creation.validation.valid).toBe(true);
     expect(await readFile(join(root, "mcp-test.drawio"), "utf8")).toContain("flowAnimation=1");
+    const artifact = created.content.find((item) => item.type === "resource");
+    expect(artifact?.type).toBe("resource");
+    if (artifact?.type !== "resource" || !("blob" in artifact.resource)) {
+      throw new Error("create_drawio did not return an embedded Draw.io resource");
+    }
+    expect(artifact.resource.mimeType).toBe("application/vnd.jgraph.mxfile");
+    expect(Buffer.from(artifact.resource.blob, "base64").toString("utf8")).toContain("<mxfile");
 
     const validation = await client.callTool({
       name: "validate_drawio",
