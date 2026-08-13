@@ -90,6 +90,8 @@ docker run --rm -p 3000:3000 \
   drawarch-mcp
 ```
 
+Or use the published image: `ghcr.io/ajey95/drawarch-mcp:0.2.0`.
+
 ## MCP tools
 
 | Tool | Purpose |
