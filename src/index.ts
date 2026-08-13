@@ -1,25 +1,38 @@
 #!/usr/bin/env node
-import { resolve } from "node:path";
-
 import { serveStdio } from "@modelcontextprotocol/server/stdio";
 
+import { runtimeConfig } from "./config.js";
+import { createDrawArchHttpServer } from "./http.js";
 import { createServer } from "./server.js";
 
-const outputRoot = resolve(process.env.DRAWARCH_OUTPUT_DIR ?? ".drawarch-output");
-const onlineAssets = process.env.DRAWARCH_ONLINE_ASSETS?.toLowerCase() === "true";
-const iconifyBaseUrl = process.env.DRAWARCH_ICONIFY_BASE_URL;
+const config = runtimeConfig();
 
-serveStdio(() =>
-  createServer({
-    outputRoot,
-    onlineAssets,
-    ...(iconifyBaseUrl === undefined ? {} : { iconifyBaseUrl }),
-  }),
-  {
-    onerror: (error) => {
-      console.error(JSON.stringify({ event: "transport_error", code: "MCP_TRANSPORT_ERROR", message: error.message }));
+if (config.transport === "http") {
+  const running = await createDrawArchHttpServer({
+    host: config.host,
+    port: config.port,
+    outputRoot: config.outputRoot,
+    onlineAssets: config.onlineAssets,
+    allowedHosts: config.allowedHosts,
+    allowedOrigins: config.allowedOrigins,
+    ...(config.iconifyBaseUrl === undefined ? {} : { iconifyBaseUrl: config.iconifyBaseUrl }),
+    ...(config.apiKey === undefined ? {} : { apiKey: config.apiKey }),
+    ...(config.publicBaseUrl === undefined ? {} : { publicBaseUrl: config.publicBaseUrl }),
+  });
+  console.error(JSON.stringify({ event: "server_started", transport: "http", baseUrl: running.baseUrl, onlineAssets: config.onlineAssets }));
+} else {
+  serveStdio(() =>
+    createServer({
+      outputRoot: config.outputRoot,
+      onlineAssets: config.onlineAssets,
+      ...(config.iconifyBaseUrl === undefined ? {} : { iconifyBaseUrl: config.iconifyBaseUrl }),
+    }),
+    {
+      onerror: (error) => {
+        console.error(JSON.stringify({ event: "transport_error", code: "MCP_TRANSPORT_ERROR", message: error.message }));
+      },
     },
-  },
-);
+  );
 
-console.error(JSON.stringify({ event: "server_started", transport: "stdio", onlineAssets }));
+  console.error(JSON.stringify({ event: "server_started", transport: "stdio", onlineAssets: config.onlineAssets }));
+}

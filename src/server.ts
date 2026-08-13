@@ -12,6 +12,7 @@ import { drawioArtifact } from "./files/artifact.js";
 import { resolveOutputPath } from "./files/output.js";
 import { listThemes } from "./themes/themes.js";
 import { validateDrawio } from "./validate/drawio.js";
+import { DRAWARCH_VERSION } from "./version.js";
 
 export interface DrawArchServerOptions {
   readonly outputRoot: string;
@@ -48,7 +49,7 @@ export function createServer(options: DrawArchServerOptions): McpServer {
     : undefined;
   const resolver = new AssetResolver({ ...(onlineProvider === undefined ? {} : { onlineProvider }) });
   const service = new DrawArchService({ outputRoot: options.outputRoot, assetResolver: resolver });
-  const server = new McpServer({ name: "drawarch-mcp", version: "0.1.0" });
+  const server = new McpServer({ name: "drawarch-mcp", version: DRAWARCH_VERSION });
 
   server.registerTool(
     "list_themes",
