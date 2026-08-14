@@ -13,6 +13,8 @@
 <p align="center">
   <a href="https://github.com/Ajey95/drawarch-mcp/actions/workflows/ci.yml"><img alt="CI status" src="https://github.com/Ajey95/drawarch-mcp/actions/workflows/ci.yml/badge.svg" /></a>
   <a href="https://github.com/Ajey95/drawarch-mcp/releases/tag/v0.2.0"><img alt="GitHub release" src="https://img.shields.io/github/v/release/Ajey95/drawarch-mcp?display_name=tag&sort=semver&color=7c3aed" /></a>
+  <a href="https://www.npmjs.com/package/drawarch-mcp"><img alt="npm version" src="https://img.shields.io/npm/v/drawarch-mcp?color=cb3837&logo=npm" /></a>
+  <a href="https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.Ajey95%2Fdrawarch"><img alt="Official MCP Registry" src="https://img.shields.io/badge/MCP%20Registry-active-22c55e" /></a>
   <a href="https://github.com/Ajey95/drawarch-mcp/pkgs/container/drawarch-mcp"><img alt="GHCR container" src="https://img.shields.io/badge/GHCR-drawarch--mcp-2563eb?logo=github" /></a>
   <img alt="Node.js 20 or newer" src="https://img.shields.io/badge/Node.js-20%2B-339933?logo=nodedotjs&logoColor=white" />
   <img alt="MCP stdio and Streamable HTTP" src="https://img.shields.io/badge/MCP-stdio%20%7C%20HTTP-06b6d4" />
@@ -96,13 +98,10 @@ DrawArch optimizes for **high-fidelity, editable reconstruction**, not an opaque
 
 Requires [Node.js 20+](https://nodejs.org/) or Docker.
 
-### Install the GitHub release
-
-The npm listing is not published yet. Install the verified `0.2.0` GitHub release tarball today:
+### Run from npm
 
 ```bash
-npm install --global https://github.com/Ajey95/drawarch-mcp/releases/download/v0.2.0/drawarch-mcp-0.2.0.tgz
-drawarch-mcp
+npx -y drawarch-mcp@0.2.0
 ```
 
 DrawArch uses stdio by default. Diagnostics go to stderr, preserving stdout for MCP messages.
@@ -113,7 +112,8 @@ DrawArch uses stdio by default. Diagnostics go to stderr, preserving stdout for 
 {
   "mcpServers": {
     "drawarch": {
-      "command": "drawarch-mcp",
+      "command": "npx",
+      "args": ["-y", "drawarch-mcp@0.2.0"],
       "env": {
         "DRAWARCH_OUTPUT_DIR": "/absolute/path/to/diagrams",
         "DRAWARCH_ONLINE_ASSETS": "false"
@@ -123,7 +123,7 @@ DrawArch uses stdio by default. Diagnostics go to stderr, preserving stdout for 
 }
 ```
 
-If your host cannot locate global npm executables, use the [source checkout](#run-from-source) and configure an absolute `dist/src/index.js` path.
+On Windows hosts that do not resolve `npx` directly, set `command` to `npx.cmd`. You can also use the [source checkout](#run-from-source) and configure an absolute `dist/src/index.js` path.
 
 ### Run from source
 
@@ -253,8 +253,8 @@ The CI matrix verifies Node 20 and 22 on Windows and Linux and builds the produc
 | Source | [Public on GitHub](https://github.com/Ajey95/drawarch-mcp) |
 | Release | [`v0.2.0`](https://github.com/Ajey95/drawarch-mcp/releases/tag/v0.2.0) |
 | Container | [`ghcr.io/ajey95/drawarch-mcp:0.2.0`](https://github.com/Ajey95/drawarch-mcp/pkgs/container/drawarch-mcp) |
-| npm | Publication pending |
-| Official MCP Registry | Metadata validated; publication follows npm release |
+| npm | [`drawarch-mcp@0.2.0`](https://www.npmjs.com/package/drawarch-mcp/v/0.2.0) |
+| Official MCP Registry | [`io.github.Ajey95/drawarch@0.2.0`](https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.Ajey95%2Fdrawarch) |
 | Managed remote service | Not currently offered |
 
 ## Roadmap
@@ -262,7 +262,7 @@ The CI matrix verifies Node 20 and 22 on Windows and Linux and builds the produc
 - Expand the curated architecture asset catalog and provider metadata.
 - Add preview rendering for tighter host-guided visual comparison loops.
 - Add pixel-aware comparison as a complement to structural scoring.
-- Publish the npm package and Official MCP Registry entry.
+- Add installation recipes for more MCP hosts and community catalogs.
 - Provide repeatable deployment recipes for common container platforms.
 
 Ideas and focused pull requests are welcome. Please open an [issue](https://github.com/Ajey95/drawarch-mcp/issues) before starting a large behavior or contract change.

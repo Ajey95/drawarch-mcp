@@ -20,8 +20,8 @@
 ## Publication
 
 - [x] Public GitHub repository pushed and CI green on Windows/Linux with Node 20/22 plus Docker build.
-- [ ] `drawarch-mcp@0.2.0` published to npm.
-- [ ] `io.github.Ajey95/drawarch` published to the Official MCP Registry.
+- [x] `drawarch-mcp@0.2.0` published to npm and verified with a clean `npx` startup.
+- [x] `io.github.Ajey95/drawarch@0.2.0` published to the Official MCP Registry with active status.
 - [ ] Durable remote HTTPS endpoint deployed and tested from an external MCP host.
 
 Items must be checked only after direct verification; local tests do not imply external publication or hosted-provider success.
