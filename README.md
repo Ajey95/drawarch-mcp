@@ -21,6 +21,9 @@
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-22c55e" /></a>
 </p>
 
+<a href="https://m8ven.ai/mcp/ajey95-drawarch-mcp-1m89eu">
+  <img src="https://m8ven.ai/badge/mcp/ajey95-drawarch-mcp-1m89eu" alt="M8ven Score">
+</a> 
 <p align="center">
   <a href="#quick-start"><strong>Quick start</strong></a> ·
   <a href="#reference-image-recreation"><strong>See the workflow</strong></a> ·
