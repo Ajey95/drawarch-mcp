@@ -29,6 +29,8 @@
   <a href="#reference-image-recreation"><strong>See the workflow</strong></a> ·
   <a href="docs/ARCHITECTURE.md"><strong>Architecture</strong></a> ·
   <a href="CONTRIBUTING.md"><strong>Contribute</strong></a>
+
+  [![Drawarch MCP server](https://mcprush.com/badge/drawarch-mcp/card.svg)](https://mcprush.com/to/drawarch-mcp?ref=badge)
 </p>
 
 ---
